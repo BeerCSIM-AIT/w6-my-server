@@ -2,12 +2,13 @@ const express = require("express");
 const app = express();
 
 // get port number from environment settings
-require('dotenv').config({ path: './config.env'});
+require('dotenv').config();
 const port = process.env.PORT || 3000;
 
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const productRoute = require('./routes/product.route');
+const categoryRoute = require("./routes/category.route");
 
 // CORS cross origin resource sharing
 app.use(cors());
@@ -21,6 +22,7 @@ app.get("/", (req, res)=>{
 
 // ใช้ productRoute เมื่อ request ขึ้นต้นด้วย /products
 app.use("/products", productRoute);
+app.use("/categories", categoryRoute);
 
 app.listen(port, () => {
   console.log("App started at port: " + port);
